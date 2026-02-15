@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pentagonal Framework — Integrated Study Reference</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #181b23;
+    --surface2: #1e2230;
+    --border: #2a2e3b;
+    --text: #e2e4ea;
+    --text-dim: #9ba1b0;
+    --accent: #7c8cf8;
+    --firm: #f59e42;
+    --micro: #38bdf8;
+    --meso: #4ade80;
+    --macro: #f472b6;
+    --meta: #c084fc;
+    --firm-bg: rgba(245,158,66,.08);
+    --micro-bg: rgba(56,189,248,.08);
+    --meso-bg: rgba(74,222,128,.08);
+    --macro-bg: rgba(244,114,182,.08);
+    --meta-bg: rgba(192,132,252,.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.7; font-size:15px; }
+
+/* NAV */
+nav { position:fixed; top:0; left:0; width:260px; height:100vh; background:var(--surface); border-right:1px solid var(--border); padding:20px 16px; overflow-y:auto; z-index:100; }
+nav h2 { font-size:14px; color:var(--accent); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:16px; }
+nav a { display:block; color:var(--text-dim); text-decoration:none; font-size:13px; padding:5px 8px; border-radius:6px; margin-bottom:2px; transition:.2s; }
+nav a:hover, nav a.active { background:var(--surface2); color:var(--text); }
+nav .sub { padding-left:16px; font-size:12px; }
+
+/* MAIN */
+main { margin-left:260px; max-width:960px; padding:40px 48px 80px; }
+
+h1 { font-size:28px; font-weight:700; margin-bottom:8px; background:linear-gradient(135deg,var(--accent),var(--meta)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.subtitle { color:var(--text-dim); font-size:14px; margin-bottom:36px; }
+
+h2 { font-size:21px; font-weight:700; margin:48px 0 16px; padding-top:16px; border-top:1px solid var(--border); color:var(--text); }
+h3 { font-size:17px; font-weight:600; margin:28px 0 10px; color:var(--text); }
+h4 { font-size:15px; font-weight:600; margin:20px 0 8px; }
+
+p, li { margin-bottom:10px; }
+ul, ol { padding-left:22px; }
+strong { color:#fff; }
+
+/* SECTIONS */
+.section { margin-bottom:32px; }
+
+/* COLLAPSIBLE */
+details { background:var(--surface); border:1px solid var(--border); border-radius:10px; margin-bottom:12px; }
+details[open] { border-color:var(--accent); }
+summary { cursor:pointer; padding:14px 18px; font-weight:600; font-size:15px; list-style:none; display:flex; align-items:center; gap:10px; user-select:none; }
+summary::before { content:'▸'; font-size:13px; transition:transform .2s; color:var(--accent); }
+details[open] summary::before { transform:rotate(90deg); }
+summary::-webkit-details-marker { display:none; }
+.detail-body { padding:4px 18px 18px; }
+
+/* LEVEL BADGES */
+.badge { display:inline-block; font-size:11px; font-weight:700; padding:2px 10px; border-radius:20px; letter-spacing:.5px; text-transform:uppercase; }
+.badge-firm { background:var(--firm-bg); color:var(--firm); border:1px solid rgba(245,158,66,.25); }
+.badge-micro { background:var(--micro-bg); color:var(--micro); border:1px solid rgba(56,189,248,.25); }
+.badge-meso { background:var(--meso-bg); color:var(--meso); border:1px solid rgba(74,222,128,.25); }
+.badge-macro { background:var(--macro-bg); color:var(--macro); border:1px solid rgba(244,114,182,.25); }
+.badge-meta { background:var(--meta-bg); color:var(--meta); border:1px solid rgba(192,132,252,.25); }
+
+/* CARDS */
+.card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:18px 20px; margin-bottom:14px; }
+.card-title { font-weight:700; font-size:15px; margin-bottom:6px; }
+
+/* KEY INSIGHT BOX */
+.insight { background:rgba(124,140,248,.07); border-left:3px solid var(--accent); padding:14px 18px; border-radius:0 8px 8px 0; margin:16px 0; }
+.insight-label { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--accent); font-weight:700; margin-bottom:4px; }
+
+/* TABLES */
+.table-wrap { overflow-x:auto; margin:16px 0; border-radius:10px; border:1px solid var(--border); }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+thead { background:var(--surface2); }
+th { padding:10px 12px; text-align:left; font-weight:700; color:var(--text); border-bottom:1px solid var(--border); white-space:nowrap; }
+td { padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; }
+tr:last-child td { border-bottom:none; }
+tr:hover td { background:rgba(124,140,248,.04); }
+td:first-child { font-weight:600; white-space:nowrap; }
+
+/* CASE STUDY */
+.case { border-left:3px solid var(--accent); margin:16px 0; }
+.case .card { border-left:none; border-radius:0 10px 10px 0; }
+
+/* DIAGRAM */
+.diagram-box { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px; margin:20px 0; text-align:center; }
+.diagram-box svg { max-width:100%; }
+
+/* PENTAGON DIAGRAM */
+.pent-container { display:flex; justify-content:center; margin:20px 0; }
+.pent-svg { max-width:420px; width:100%; }
+
+/* FLOW ARROWS */
+.flow { display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin:16px 0; }
+.flow-item { padding:8px 14px; border-radius:8px; font-size:13px; font-weight:600; }
+.flow-arrow { color:var(--text-dim); font-size:18px; }
+
+/* MECHANISM LIST */
+.mech-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0; }
+.mech-item { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:12px 14px; }
+.mech-num { display:inline-block; width:22px; height:22px; line-height:22px; text-align:center; background:var(--accent); color:#fff; border-radius:50%; font-size:11px; font-weight:700; margin-right:6px; }
+
+/* RESPONSIVE */
+@media(max-width:900px){
+nav { display:none; }
+main { margin-left:0; padding:24px 18px 60px; }
+.mech-grid { grid-template-columns:1fr; }
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+  <h2>Contents</h2>
+  <a href="#exec">Executive Summary</a>
+  <a href="#framework" class="sub">Framework Overview</a>
+  <a href="#levels">Level Definitions</a>
+  <a href="#level-firm" class="sub">Firm</a>
+  <a href="#level-micro" class="sub">Micro / Industry</a>
+  <a href="#level-meso" class="sub">Meso / Cluster</a>
+  <a href="#level-macro" class="sub">Macro / National</a>
+  <a href="#level-meta" class="sub">Meta / Supranational</a>
+  <a href="#usage" class="sub">Practical Usage</a>
+  <a href="#drivers">Driver Taxonomy &amp; Tables</a>
+  <a href="#tbl-firm" class="sub">Firm Drivers</a>
+  <a href="#tbl-micro" class="sub">Micro Drivers</a>
+  <a href="#tbl-meso" class="sub">Meso Drivers</a>
+  <a href="#tbl-macro" class="sub">Macro Drivers</a>
+  <a href="#tbl-meta" class="sub">Meta Drivers</a>
+  <a href="#detail-levels" class="sub">Level-by-Level Detail</a>
+  <a href="#interactions">Cross-Level Interactions</a>
+  <a href="#adj" class="sub">Adjacent Mechanisms</a>
+  <a href="#nonadj" class="sub">Non-Adjacent Mechanisms</a>
+  <a href="#selection" class="sub">Selection &amp; Reallocation</a>
+  <a href="#institutions" class="sub">Institutions as Transmission</a>
+  <a href="#cases">Empirical Cases</a>
+  <a href="#case-tsmc" class="sub">TSMC / Taiwan</a>
+  <a href="#case-vestas" class="sub">Vestas / Denmark</a>
+  <a href="#case-mpesa" class="sub">M-PESA / Kenya</a>
+  <a href="#case-boston" class="sub">Boston Life Sciences</a>
+  <a href="#case-gfc" class="sub">Global Financial Crisis</a>
+  <a href="#implications">Implications by Level</a>
+  <a href="#methodology">Methodology &amp; Gaps</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════ EXEC SUMMARY ═══════════════════════════ -->
+
+<h1 id="exec">Multi-Level Strategic Drivers in the Pentagonal Framework</h1>
+<div class="subtitle">Integrated Study Reference — Comprehensive, Zero-Omission Consolidation</div>
+
+<div class="section">
+<p>The pentagonal framework, attributed to <strong>Michael J. Enright</strong>, organizes the determinants of <strong>performance</strong> as a coherent system of <strong>multi-level drivers</strong> spanning five analytically distinct but causally intertwined levels: <strong>firm</strong>, <strong>micro/industry</strong>, <strong>meso/cluster</strong>, <strong>macro/national</strong>, and <strong>meta/supranational (international)</strong>.</p>
+<p>Its central analytic claim is not merely that "many things matter," but that <strong>forces at each level influence performance at every level</strong>, implying pervasive cross-level dependencies and feedback loops.</p>
+
+<div class="card">
+  <div class="card-title">Design Principles</div>
+  <ul>
+    <li><strong>Comprehensive</strong> — limits blind spots by covering all five levels.</li>
+    <li><strong>Integrative</strong> — links levels in one unified logic.</li>
+    <li><strong>Dynamic</strong> — explicitly supports trend, shock, and discontinuity analysis.</li>
+  </ul>
+  <p style="margin-top:8px;">It functions as a <strong>structured diagnostic</strong> — a "set of questions" to ensure completeness rather than a one-size-fits-all prescription.</p>
+</div>
+
+<div class="insight">
+  <div class="insight-label">Core Analytic Move</div>
+  Treat performance as an <strong>outcome of cross-level fit</strong>, where drivers are <strong>mutually conditioning</strong>. The same firm can look "excellent" or "fragile" depending on cross-level alignment: strong positioning/execution can be overwhelmed by macro crises or sanctions/fragmentation, while weak firms can be propped up temporarily by favorable industry structure or targeted cluster policy.
+</div>
+
+<h3 id="framework">Empirical Support (Three Key Regularities)</h3>
+<ol>
+  <li><strong>Cluster strength → employment &amp; innovation growth.</strong> A large-scale cluster-composition study finds that industries in "strong" regional clusters exhibit higher employment and patenting growth.</li>
+  <li><strong>Management quality → firm performance.</strong> Cross-country evidence shows strong associations between management quality and productivity, profitability, market valuation, growth, and survival — shaped also by national/competitive contexts.</li>
+  <li><strong>Trade openness → selection &amp; reallocation.</strong> Supranational openness can raise aggregate productivity via selection across heterogeneous firms — directly linking international drivers to industry structure and firm survival.</li>
+</ol>
+</div>
+
+<!-- ═══════════════════════════ LEVEL DEFINITIONS ═══════════════════════════ -->
+
+<h2 id="levels">Level Definitions</h2>
+<p>The diagram centers <strong>performance</strong> and positions five "levels of drivers" around it. Causal arrows are <strong>not one-directional</strong>. The five levels are best treated as <strong>nested and networked</strong>: nested because firms operate inside industries and places; networked because global value chains, standards, and financial flows connect non-adjacent levels directly.</p>
+
+<!-- PENTAGON SVG -->
+
+<div class="diagram-box">
+  <div class="pent-container">
+    <svg class="pent-svg" viewBox="0 0 440 420" xmlns="http://www.w3.org/2000/svg">
+      <!-- pentagon points: top(220,30) upper-right(400,165) lower-right(340,370) lower-left(100,370) upper-left(40,165) -->
+      <polygon points="220,52 388,175 328,365 112,365 52,175" fill="none" stroke="#2a2e3b" stroke-width="1.5"/>
+      <!-- center -->
+      <circle cx="220" cy="220" r="38" fill="rgba(124,140,248,.12)" stroke="var(--accent)" stroke-width="2"/>
+      <text x="220" y="216" text-anchor="middle" fill="#7c8cf8" font-size="11" font-weight="700">PERFOR-</text>
+      <text x="220" y="230" text-anchor="middle" fill="#7c8cf8" font-size="11" font-weight="700">MANCE</text>
+      <!-- lines to center -->
+      <line x1="220" y1="52" x2="220" y2="182" stroke="#2a2e3b" stroke-width="1" stroke-dasharray="4"/>
+      <line x1="388" y1="175" x2="258" y2="210" stroke="#2a2e3b" stroke-width="1" stroke-dasharray="4"/>
+      <line x1="328" y1="365" x2="248" y2="250" stroke="#2a2e3b" stroke-width="1" stroke-dasharray="4"/>
+      <line x1="112" y1="365" x2="192" y2="250" stroke="#2a2e3b" stroke-width="1" stroke-dasharray="4"/>
+      <line x1="52" y1="175" x2="182" y2="210" stroke="#2a2e3b" stroke-width="1" stroke-dasharray="4"/>
+      <!-- nodes -->
+      <circle cx="220" cy="44" r="28" fill="rgba(245,158,66,.15)" stroke="var(--firm)" stroke-width="2"/>
+      <text x="220" y="41" text-anchor="middle" fill="var(--firm)" font-size="10" font-weight="700">FIRM</text>
+      <text x="220" y="53" text-anchor="middle" fill="var(--firm)" font-size="8">Level</text>
+
+      <circle cx="393" cy="172" r="28" fill="rgba(56,189,248,.15)" stroke="var(--micro)" stroke-width="2"/>
+      <text x="393" y="169" text-anchor="middle" fill="var(--micro)" font-size="10" font-weight="700">MICRO</text>
+      <text x="393" y="181" text-anchor="middle" fill="var(--micro)" font-size="8">Industry</text>
+
+      <circle cx="333" cy="370" r="28" fill="rgba(74,222,128,.15)" stroke="var(--meso)" stroke-width="2"/>
+      <text x="333" y="367" text-anchor="middle" fill="var(--meso)" font-size="10" font-weight="700">MESO</text>
+      <text x="333" y="379" text-anchor="middle" fill="var(--meso)" font-size="8">Cluster</text>
+
+      <circle cx="107" cy="370" r="28" fill="rgba(244,114,182,.15)" stroke="var(--macro)" stroke-width="2"/>
+      <text x="107" y="367" text-anchor="middle" fill="var(--macro)" font-size="10" font-weight="700">MACRO</text>
+      <text x="107" y="379" text-anchor="middle" fill="var(--macro)" font-size="8">National</text>
+
+      <circle cx="47" cy="172" r="28" fill="rgba(192,132,252,.15)" stroke="var(--meta)" stroke-width="2"/>
+      <text x="47" y="169" text-anchor="middle" fill="var(--meta)" font-size="10" font-weight="700">META</text>
+      <text x="47" y="181" text-anchor="middle" fill="var(--meta)" font-size="8">Supra</text>
+    </svg>
+
+  </div>
+</div>
+
+<details id="level-firm">
+  <summary><span class="badge badge-firm">Firm</span> &nbsp;Firm Level — Unit: The Firm</summary>
+  <div class="detail-body">
+    <p>Focuses on strategy and execution inside the organization. Drivers: <strong>positioning, activities, resources, knowledge, competitive scope, corporate strategy, organization, and leadership</strong> — shaping a firm's ability to create and capture value relative to rivals.</p>
+    <p>A disciplined distinction — enduring in the strategy canon — is that operational improvement alone does not guarantee sustainable advantage; advantage depends on being <strong>different</strong> in ways competitors cannot easily copy (through distinctive activities and fit).</p>
+    <p><strong>Primary mechanism:</strong> Value creation and appropriation (strategy, fit, capability building).</p>
+  </div>
+</details>
+
+<details id="level-micro">
+  <summary><span class="badge badge-micro">Micro</span> &nbsp;Micro / Industry Level — Unit: The Industry</summary>
+  <div class="detail-body">
+    <p>Treats the industry as the immediate arena where the "rules of the game" condition firm strategies. Drivers: <strong>industry characteristics, competition, cooperation, strategic groupings, the role of lead firms, micro policies, and micro institutions</strong>.</p>
+    <p>The "five competitive forces" approach is the canonical mechanism description for how rivalry, entry, substitutes, and bargaining power drive industry profitability.</p>
+    <p><strong>Primary mechanism:</strong> Structural profit constraints and strategic interaction.</p>
+  </div>
+</details>
+
+<details id="level-meso">
+  <summary><span class="badge badge-meso">Meso</span> &nbsp;Meso / Cluster Level — Unit: The Cluster / Ecosystem</summary>
+  <div class="detail-body">
+    <p>Analyzes geographically and institutionally embedded complementarities among interdependent sets of related industries and actors — suppliers, customers, complements, substitutes, shared labor pools, shared infrastructure, and supporting institutions.</p>
+    <p>Drivers: <strong>inputs and suppliers; demand and customers; shared resources; shared activities; complementarities; substitutes; meso policies; meso institutions</strong>.</p>
+    <p>Canonical cluster mechanism: co-location can raise productivity, accelerate innovation, and stimulate new business formation — while also creating <strong>congestion and cost pressures</strong> if density becomes excessive.</p>
+    <p><strong>Primary mechanism:</strong> Externalities and complementarities.</p>
+  </div>
+</details>
+
+<details id="level-macro">
+  <summary><span class="badge badge-macro">Macro</span> &nbsp;Macro / National Level — Unit: The National Economy</summary>
+  <div class="detail-body">
+    <p>Captures economy-wide conditions. Drivers: <strong>macroeconomics, macro government policies, macro institutions, and civil society</strong> — altering demand, costs, investment horizons, and the enforceability of contracts and property rights.</p>
+    <p>Institutional quality is not just context — it is itself a <strong>measurable driver</strong> that influences investment and long-run income, while macro volatility can dominate near-term firm outcomes through demand, financing, and confidence channels.</p>
+    <p><strong>Primary mechanism:</strong> Stability and enforceability.</p>
+  </div>
+</details>
+
+<details id="level-meta">
+  <summary><span class="badge badge-meta">Meta</span> &nbsp;Meta / Supranational Level — Unit: Cross-Border Regimes &amp; Flows</summary>
+  <div class="detail-body">
+    <p>Covers cross-border drivers largely outside the control of any single nation. Drivers: <strong>multilateral organizations and rules, supranational policies, supranational institutions, trade blocs, foreign governments, international financial flows, foreign multinationals, and regional groupings</strong>.</p>
+    <p>Mechanisms operate through rules (trade and standards), governance of global value chains, and shocks such as geopolitical risk, which is empirically associated with reduced firm investment and heightened downside risks.</p>
+    <p><strong>Primary mechanism:</strong> Rules, governance, and cross-border flows.</p>
+  </div>
+</details>
+
+<div class="card" id="usage">
+  <div class="card-title">Practical Usage</div>
+  <p>Treat each driver label as a <strong>hypothesis generator</strong>:</p>
+  <ol>
+    <li>Identify the driver's <strong>current state and trend</strong>.</li>
+    <li>Assess its <strong>sensitivity to shocks</strong>.</li>
+    <li>Map its <strong>interactions with other levels</strong>.</li>
+    <li>Translate the map into <strong>prioritized managerial actions and policy levers</strong>.</li>
+  </ol>
+  <p>More rigorously, each driver should be treated as: (i) a <strong>state variable</strong> (current level), (ii) a <strong>trajectory</strong> (direction and volatility), and (iii) a <strong>sensitivity</strong> (exposure to shocks and constraints).</p>
+  <div class="insight" style="margin-bottom:0;">
+    <div class="insight-label">Key Implication</div>
+    The "right" strategic explanation is often <strong>multi-level</strong>: firm-level excellence may be necessary but insufficient if industry economics are structurally unattractive; cluster advantages may be stunted by weak national institutions; and supranational fragmentation can invalidate locally optimal strategies.
+  </div>
+</div>
+
+<!-- ═══════════════════════════ DRIVER TAXONOMY ═══════════════════════════ -->
+
+<h2 id="drivers">Expanded Driver Taxonomy &amp; Measurement</h2>
+<p>Measurement should combine "hard" outcomes (financials, patents, productivity proxies) with institutional and perception-based indices. Indicators reflect: firm financials &amp; governance disclosures, management practice surveys, industry concentration metrics, cluster mapping, national accounts &amp; governance indices, and international trade/FDI/value-chain datasets.</p>
+
+<!-- FIRM TABLE -->
+
+<h3 id="tbl-firm"><span class="badge badge-firm">Firm</span> &nbsp;Firm-Level Drivers</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Driver</th><th>What It Captures</th><th>Illustrative Examples</th><th>Measurement</th><th>Levers</th></tr></thead>
+<tbody>
+<tr><td>Positioning</td><td>Target customer, value proposition vs. rivals: price/quality/features, differentiation vs. cost leadership, target segments; willingness-to-pay capture</td><td>Premium pricing vs. parity pricing; premium vs. value segment choice</td><td>Relative price premium; gross margin vs. peer set; NPS/CSAT; brand strength proxies; share in target segment; switching-cost proxies</td><td><strong>Mgmt:</strong> segment focus, pricing discipline, product-market fit; clarify value proposition, prune inconsistent offers. <strong>Policy:</strong> consumer protection/labeling; consumer transparency</td></tr>
+<tr><td>Activities</td><td>The activity system: interlinked value-chain activities (R&amp;D, operations, marketing, service) and their fit; what is done and how activities fit together</td><td>Lean operations + fast product cycles; tight "design–manufacture–service" integration</td><td>Unit cost, cycle time, defect rates; delivery reliability; marketing ROI; on-time delivery; customer retention</td><td><strong>Mgmt:</strong> process improvement, digitization; redesign activity fit; invest in process excellence consistent with positioning. <strong>Policy:</strong> diffusion programs for SMEs, standards support</td></tr>
+<tr><td>Resources</td><td>Financial, human, physical, intangible assets enabling strategy</td><td>Capex scale for fabs; scale capital for capacity expansion</td><td>Leverage/liquidity; capex-to-sales; skill mix; intangible asset investment; cash buffers; asset utilization</td><td><strong>Mgmt:</strong> capital allocation discipline, talent systems. <strong>Policy:</strong> capital market depth, workforce programs/development</td></tr>
+<tr><td>Knowledge</td><td>Market/tech/organizational know-how; absorptive capacity; learning; innovation capacity</td><td>Patenting + process know-how; learning curve in complex manufacturing</td><td>Patent counts/citations; R&amp;D intensity; learning curves; training hours; knowledge-transfer metrics</td><td><strong>Mgmt:</strong> R&amp;D portfolio governance, knowledge management, partnerships. <strong>Policy:</strong> R&amp;D tax credits/incentives, IP system quality</td></tr>
+<tr><td>Competitive Scope</td><td>Product/segment and geographic scope inside a business; breadth of competitive footprint</td><td>Multi-region footprint vs. single market</td><td>Revenue concentration by product/region; Herfindahl by segment (internal); geographic diversification indices; export share</td><td><strong>Mgmt:</strong> disciplined expansion; risk diversification. <strong>Policy:</strong> reduce barriers to internal market integration</td></tr>
+<tr><td>Corporate Strategy</td><td>Multi-business portfolio logic; synergies; parenting advantage</td><td>Platform + hardware synergies; platforms spanning multiple businesses</td><td>Portfolio returns (ROIC); synergy realization metrics; relatedness indices; divestiture/entry cadence</td><td><strong>Mgmt:</strong> portfolio pruning/restructuring, synergy governance. <strong>Policy:</strong> conglomerate governance, transparency rules, disclosure &amp; governance standards</td></tr>
+<tr><td>Organization</td><td>Structure, systems, incentives, coordination; ability to execute strategy at scale; decision rights &amp; execution capacity</td><td>Modular org for rapid scaling; high-velocity product development organization</td><td>Management-practice scores; span of control; decision latency; employee turnover; process compliance</td><td><strong>Mgmt:</strong> redesign structure/incentives; invest in management systems. <strong>Policy:</strong> labor market flexibility + protections balance</td></tr>
+<tr><td>Leadership</td><td>Direction setting, integrity, execution discipline, crisis response; transformation capacity</td><td>Rapid pivot in downturn; turnaround leadership under turbulence</td><td>Strategy cadence; leadership continuity; crisis response speed; strategy-cycle cadence</td><td><strong>Mgmt:</strong> succession planning, governance, board oversight. <strong>Policy:</strong> corporate governance codes/enforcement</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- MICRO TABLE -->
+
+<h3 id="tbl-micro"><span class="badge badge-micro">Micro</span> &nbsp;Micro / Industry-Level Drivers</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Driver</th><th>What It Captures</th><th>Illustrative Examples</th><th>Measurement</th><th>Levers</th></tr></thead>
+<tbody>
+<tr><td>Industry Characteristics</td><td>Size, growth, life cycle, capital intensity, scale economies, tech trajectory</td><td>"Winner-take-most" digital markets; mature capital-intensive sector</td><td>Industry CAGR; capital intensity; minimum efficient scale; capex-to-sales norms</td><td><strong>Policy:</strong> entry barriers/standards; remove artificial barriers to efficient entry. <strong>Mgmt:</strong> timing entry/exit, capacity strategy/discipline</td></tr>
+<tr><td>Competition</td><td>Rivalry intensity and structure; five-forces logic; structural forces shaping profitability</td><td>Airline price wars; price wars vs. differentiated rivalry</td><td>HHI/concentration; price-cost margins; entry/exit rates</td><td><strong>Policy:</strong> antitrust/merger review; competition enforcement. <strong>Mgmt:</strong> differentiation, cost position/advantage</td></tr>
+<tr><td>Cooperation</td><td>Alliances, standards consortia, coopetition; pre-competitive coordination</td><td>Joint R&amp;D pre-competition; joint standards development</td><td>Alliance density/network metrics; co-patenting networks; standards adoption</td><td><strong>Policy:</strong> safe harbors for R&amp;D consortia. <strong>Mgmt:</strong> alliance governance &amp; IP discipline</td></tr>
+<tr><td>Strategic Groupings</td><td>Clusters of similar strategies inside an industry (strategic groups); mobility barriers</td><td>Premium vs. budget segments/strategic groups</td><td>Group mapping by price/quality; mobility barriers; strategic distance</td><td><strong>Mgmt:</strong> choose group or disrupt it; disrupt mobility barriers. <strong>Policy:</strong> transparency/consumer info; prevent exclusionary conduct</td></tr>
+<tr><td>Role of Lead Firms</td><td>Anchors shaping standards, supplier terms, innovation direction; how dominant firms/platforms shape profit allocation</td><td>Platform leaders orchestrating ecosystems; lead firm dictates interface &amp; terms</td><td>Share of orders controlled by anchors; supplier dependence; platform take rates; ecosystem concentration</td><td><strong>Policy:</strong> platform/competition regulation; fair dealing rules. <strong>Mgmt:</strong> reduce dependence, multi-source/multi-home</td></tr>
+<tr><td>Micro Policies</td><td>Industry-specific regulation/subsidies/safety rules; procurement rules</td><td>Pharma approval regimes; licensing, safety, tendering rules</td><td>Regulatory timelines; subsidy size; compliance cost; subsidy intensity</td><td><strong>Policy:</strong> smart regulation; predictable, performance-based regulation. <strong>Mgmt:</strong> regulatory strategy, compliance capability</td></tr>
+<tr><td>Micro Institutions</td><td>Standards bodies, certification regimes, industry associations; dispute resolution norms</td><td>ISO/sector standards; certification &amp; standards infrastructure</td><td>Standards adoption; certification rates; standard diffusion; arbitration use</td><td><strong>Policy:</strong> standards infrastructure; upgrade standards &amp; testing capacity. <strong>Mgmt:</strong> participate in standard-setting</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- MESO TABLE -->
+
+<h3 id="tbl-meso"><span class="badge badge-meso">Meso</span> &nbsp;Meso / Cluster-Level Drivers</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Driver</th><th>What It Captures</th><th>Illustrative Examples</th><th>Measurement</th><th>Levers</th></tr></thead>
+<tbody>
+<tr><td>Inputs &amp; Suppliers</td><td>Depth/quality/cost/resilience/specialization of specialized inputs and supplier base</td><td>Local electronics supply base; dense specialized supplier network</td><td>Supplier density; input lead times; local content shares; supply risk metrics</td><td><strong>Policy:</strong> supplier development. <strong>Mgmt:</strong> supplier partnerships &amp; redundancy</td></tr>
+<tr><td>Demand &amp; Customers</td><td>Sophistication, size, growth, segmentation, and early adoption of local/regional demand</td><td>Early adopter customers; lead-user customer base</td><td>Market sophistication proxies; lead-user presence; early adopter density; procurement patterns</td><td><strong>Policy:</strong> public/smart procurement. <strong>Mgmt:</strong> co-design/co-development with lead users</td></tr>
+<tr><td>Shared Resources</td><td>Common labor pools, universities, labs, infrastructure; talent &amp; research availability</td><td>Shared research hospitals/facilities</td><td>STEM grads/grad flows; research capacity; lab space; infrastructure quality/reliability</td><td><strong>Policy:</strong> education, infrastructure. <strong>Mgmt:</strong> university &amp; lab partnerships</td></tr>
+<tr><td>Shared Activities</td><td>Joint training, marketing, logistics, other collective efficiencies &amp; coordination</td><td>Cluster branding; joint training programs</td><td>Participation in joint programs; cost reductions; shared-service utilization</td><td><strong>Policy:</strong> cluster org funding; fund neutral intermediaries. <strong>Mgmt:</strong> participate, shape agenda, coordinate where value-creating</td></tr>
+<tr><td>Complementarities</td><td>Co-located complements increasing willingness-to-pay or productivity</td><td>Hardware–software complementarity; complementary tech stack</td><td>Complement adoption rates; cross-industry input-output links; I-O link strength</td><td><strong>Policy:</strong> interoperability. <strong>Mgmt:</strong> bundling, ecosystem design &amp; partnerships</td></tr>
+<tr><td>Substitutes</td><td>Nearby or related alternatives limiting margins or shifting demand</td><td>Digital substitutes for analog; substitute technologies</td><td>Cross-price elasticities; substitution indices</td><td><strong>Policy:</strong> consumer switching costs oversight; competition &amp; switching facilitation. <strong>Mgmt:</strong> differentiation, pivot, cannibalize</td></tr>
+<tr><td>Meso Policies</td><td>Cluster initiatives, science parks, innovation vouchers</td><td>Science park support/program</td><td>Program uptake; cluster employment/wage growth</td><td><strong>Policy:</strong> cluster strategies; fix coordination failures. <strong>Mgmt:</strong> leverage programs responsibly without dependency</td></tr>
+<tr><td>Meso Institutions</td><td>Technology transfer offices, cluster associations, incubators; VC infrastructure</td><td>Accelerator networks; robust tech transfer &amp; venture finance</td><td>Patent licensing; startup formation; network density; licensing rates</td><td><strong>Policy:</strong> strengthen intermediaries. <strong>Mgmt:</strong> boundary-spanning roles</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- MACRO TABLE -->
+
+<h3 id="tbl-macro"><span class="badge badge-macro">Macro</span> &nbsp;Macro / National-Level Drivers</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Driver</th><th>What It Captures</th><th>Illustrative Examples</th><th>Measurement</th><th>Levers</th></tr></thead>
+<tbody>
+<tr><td>Macroeconomics</td><td>Demand, inflation, rates, FX, crises; volatility &amp; stability; crisis dynamics</td><td>Recession shocks; recession &amp; credit stress</td><td>GDP growth; inflation; rates; FX volatility; crisis indicators; policy rates</td><td><strong>Policy:</strong> stabilization, prudential regulation/policy. <strong>Mgmt:</strong> hedging, liquidity buffers</td></tr>
+<tr><td>Macro Gov't Policies</td><td>Economy-wide tax, trade, education, industrial, competition stance; broad productivity reforms</td><td>R&amp;D tax credit regimes; broad productivity reforms</td><td>Total factor productivity trend; tax burdens/wedge; education outcomes; regulatory burden proxies</td><td><strong>Policy:</strong> productivity-oriented reforms. <strong>Mgmt:</strong> location strategy, compliance</td></tr>
+<tr><td>Macro Institutions</td><td>Rule of law, property rights, contract enforcement, regulatory quality; credible enforcement</td><td>Confidence to invest long-term; credible contract enforcement</td><td>Governance indices (WGI); dispute resolution time; corruption proxies</td><td><strong>Policy:</strong> institution-building/strengthening. <strong>Mgmt:</strong> country risk governance/controls</td></tr>
+<tr><td>Civil Society</td><td>Trust, social norms, legitimacy, stakeholder pressure</td><td>ESG legitimacy; social trust enabling transactions</td><td>Social trust proxies/surveys; civil freedom measures; reputation indices; civic participation; labor relations indicators</td><td><strong>Policy:</strong> transparency, inclusion. <strong>Mgmt:</strong> stakeholder strategy, integrity</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- META TABLE -->
+
+<h3 id="tbl-meta"><span class="badge badge-meta">Meta</span> &nbsp;Meta / Supranational-Level Drivers</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Driver</th><th>What It Captures</th><th>Illustrative Examples</th><th>Measurement</th><th>Levers</th></tr></thead>
+<tbody>
+<tr><td>Multilateral Orgs</td><td>Rule-making, dispute settlement, development finance</td><td>WTO disciplines; multilateral trade framework</td><td>Membership, dispute activity; compliance costs</td><td><strong>Policy:</strong> engagement &amp; compliance. <strong>Mgmt:</strong> trade law/compliance capability</td></tr>
+<tr><td>Supranational Policies</td><td>Cross-border rules: sanctions, export controls, climate regimes</td><td>Export control shocks affecting supply chains</td><td>Tariff rates; sanctions indices; policy exposure indices; compliance incidents</td><td><strong>Policy:</strong> diplomacy, risk mitigation. <strong>Mgmt:</strong> scenario planning, compliance systems</td></tr>
+<tr><td>Supranational Institutions</td><td>Regional courts/commissions, standards regimes; harmonized rule systems</td><td>EU internal market rules; regional regulatory harmonization</td><td>Regulatory harmonization measures/score proxies; regulatory divergence measures</td><td><strong>Policy:</strong> harmonize where efficient. <strong>Mgmt:</strong> cross-border regulatory strategy</td></tr>
+<tr><td>Trade Blocs</td><td>Market integration via agreements; preferential access &amp; rules-of-origin shaping location</td><td>Single market access; integrated regional market</td><td>Preferential tariff coverage; rules-of-origin restrictiveness</td><td><strong>Policy:</strong> negotiate &amp; implement. <strong>Mgmt:</strong> supply-chain redesign; sourcing to meet rules</td></tr>
+<tr><td>Foreign Governments</td><td>Extraterritorial rules, subsidies, procurement, security restrictions</td><td>Subsidy races; foreign subsidy competition</td><td>Policy stringency indices; subsidy levels/intensity; procurement access restrictions</td><td><strong>Policy:</strong> reciprocal/reciprocity frameworks. <strong>Mgmt:</strong> geopolitical diversification</td></tr>
+<tr><td>Int'l Financial Flows</td><td>FDI, portfolio flows, sudden stops; cost of capital impacts; tight global financing</td><td>Capital flight episodes; tight global financing conditions</td><td>FDI inflows/flows; volatility; spread measures; project finance volumes</td><td><strong>Policy:</strong> capital-market resilience, transparency. <strong>Mgmt:</strong> capital structure resilience; funding diversification</td></tr>
+<tr><td>Foreign Multinationals</td><td>Rival entry, spillovers, competitive pressure; GVC orchestration; lead-firm governance in chains</td><td>Lead-firm governance in chains</td><td>Foreign affiliate share; supplier spillover measures; supplier upgrading rates</td><td><strong>Policy:</strong> investment screening + openness balance; attract quality FDI + upgrading. <strong>Mgmt:</strong> capability upgrading &amp; bargaining power</td></tr>
+<tr><td>Regional Groupings</td><td>Cross-border regional demand &amp; production systems; regionalization of trade/production networks</td><td>Regional production networks/system</td><td>Intra-regional trade share; TiVA regionalization; regional value-chain participation</td><td><strong>Policy:</strong> cross-border infrastructure. <strong>Mgmt:</strong> regional platform strategy</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- LEVEL-BY-LEVEL DETAIL -->
+
+<h3 id="detail-levels">Level-by-Level Detail</h3>
+
+<details>
+  <summary><span class="badge badge-firm">Firm</span> &nbsp;Firm-Level Detail</summary>
+  <div class="detail-body">
+    <p>Performance depends on creating customer value and capturing it through coherent scope, positioning, supporting activities, resources and knowledge, and through leadership and organizational execution.</p>
+    <p>The <strong>resource-based view</strong> formalizes "resources and capabilities" as potential sources of sustained advantage when they are valuable and difficult to imitate, while <strong>dynamic capabilities</strong> highlight the importance of sensing and reconfiguring in turbulent environments.</p>
+    <p>Sustained advantage lies in performing different activities or performing similar activities differently, creating <strong>trade-offs</strong> that competitors cannot replicate without undermining their own systems.</p>
+    <p>Measurement relies on relative performance metrics (profitability, growth, market valuation) and operational indicators, consistent with emphasis on profitability, profitable growth, and "relative to benchmarks" evaluation.</p>
+  </div>
+</details>
+<details>
+  <summary><span class="badge badge-micro">Micro</span> &nbsp;Micro / Industry-Level Detail</summary>
+  <div class="detail-body">
+    <p>Industry characteristics and the structure of competition shape average profit potential and the feasibility of certain strategies. <strong>Porter's five-forces logic</strong> remains the canonical mechanism description.</p>
+    <p>Measurement typically uses concentration (e.g., HHI), price-cost margins, entry/exit rates, and regulatory compliance metrics. Market definition and the measurement of market shares and concentration are tools for evaluating competitive harm in well-established competition enforcement practice.</p>
+  </div>
+</details>
+<details>
+  <summary><span class="badge badge-meso">Meso</span> &nbsp;Meso / Cluster-Level Detail</summary>
+  <div class="detail-body">
+    <p>Cluster drivers focus on interdependence via <strong>vertical</strong> (inputs/suppliers; demand/customers) and <strong>horizontal</strong> linkages (shared resources/activities; complementarities and substitutes), plus meso policies and institutions that coordinate or amplify externalities.</p>
+    <p>The productivity and innovation logic of clusters has strong conceptual grounding and growing econometric evidence. <strong>Cluster mapping methods</strong> emphasize using observable co-location, input-output linkages, and similarity in skill use as evidence of cluster structure; evidence-based targeting is preferable to prestige-based targeting.</p>
+  </div>
+</details>
+<details>
+  <summary><span class="badge badge-macro">Macro</span> &nbsp;Macro / National-Level Detail</summary>
+  <div class="detail-body">
+    <p>The measurement toolkit is well-established: national accounts and development indicators for macro conditions, and governance metrics for institutional quality.</p>
+    <p>The <strong>governance-indicator methodology</strong> (e.g., WGI) underscores cross-country comparability but cautions that broad indices are less suited to evaluating specific reforms, reinforcing the need for targeted diagnostics.</p>
+  </div>
+</details>
+<details>
+  <summary><span class="badge badge-meta">Meta</span> &nbsp;Meta / Supranational-Level Detail</summary>
+  <div class="detail-body">
+    <p>Measurement spans trade agreement coverage, sanction/export-control exposure, FDI and capital flow data, and explicit <strong>geopolitical risk indices</strong>. News-based indices show systematic relationships with investment and employment, enabling integration of "soft" geopolitical drivers into quantitative strategy dashboards.</p>
+    <p>UNCTAD reports indicate weak cross-border M&amp;A and project finance conditions; global investment patterns increasingly shaped by fragmentation, geopolitical tensions, industrial policies, and supply chain diversification.</p>
+  </div>
+</details>
+
+<!-- ═══════════════════════════ CROSS-LEVEL INTERACTIONS ═══════════════════════════ -->
+
+<h2 id="interactions">Cross-Level Interaction Mechanisms &amp; Feedback Loops</h2>
+
+<p>The framework's most important methodological contribution is to force explicit reasoning about <strong>interaction mechanisms</strong> rather than treating levels as additive "factors."</p>
+
+<h3>Six Mechanism Families</h3>
+<div class="mech-grid">
+  <div class="mech-item"><span class="mech-num">1</span><strong>Constraint / Enablement</strong> — drivers at one level set the feasible frontier for another.</div>
+  <div class="mech-item"><span class="mech-num">2</span><strong>Complementarity</strong> — returns to one driver are amplified (or dampened) by the state of a driver at another level.</div>
+  <div class="mech-item"><span class="mech-num">3</span><strong>Selection &amp; Reallocation</strong> — changes in one level alter the composition of actors at another level.</div>
+  <div class="mech-item"><span class="mech-num">4</span><strong>Spillovers &amp; Learning</strong> — knowledge and practices diffuse across levels.</div>
+  <div class="mech-item"><span class="mech-num">5</span><strong>Institutional Transmission</strong> — rules and enforcement structures mediate how shocks propagate.</div>
+  <div class="mech-item"><span class="mech-num">6</span><strong>Feedback from Firm Actions</strong> — firm behavior reshapes industry, cluster, and even macro conditions.</div>
+</div>
+
+<!-- ADJACENT -->
+
+<h3 id="adj">Adjacent-Level Mechanisms</h3>
+
+<details>
+  <summary><span class="badge badge-firm">Firm</span> ↔ <span class="badge badge-micro">Industry</span></summary>
+  <div class="detail-body">
+    <p>Industry structure conditions the return on firm-level capabilities: strong resources and execution can still be competed away in hypercompetitive settings, while favorable structure can amplify modest capabilities.</p>
+    <p>Conversely, firms reshape industries via entry/exit, innovation, vertical integration, and standards competition — creating feedback.</p>
+  </div>
+</details>
+<details>
+  <summary><span class="badge badge-micro">Industry</span> ↔ <span class="badge badge-meso">Cluster</span></summary>
+  <div class="detail-body">
+    <p>Cluster externalities operate through thicker supplier markets, specialized labor, knowledge spillovers, and local rivalry/cooperation that change productivity and innovation rates inside industries. "Strong clusters" are empirically associated with higher employment and patenting growth at the regional-industry level.</p>
+    <p>Industry evolution (platform shifts, modularization, outsourcing) can also reorganize cluster boundaries by relocating activities or splitting once-integrated industries.</p>
+  </div>
+</details>
+<details>
+  <summary><span class="badge badge-meso">Cluster</span> ↔ <span class="badge badge-macro">Nation</span></summary>
+  <div class="detail-body">
+    <p>National institutions and policies shape cluster formation by determining whether specialized investments are safe (property rights), financeable (capital markets), and scalable (infrastructure and skills).</p>
+    <p>In return, successful clusters influence macro outcomes through productivity, exports, and fiscal capacity — creating political economy feedback into policy priorities.</p>
+  </div>
+</details>
+<details>
+  <summary><span class="badge badge-macro">Nation</span> ↔ <span class="badge badge-meta">Supra</span></summary>
+  <div class="detail-body">
+    <p>Trade blocs and multilateral rules constrain national policy, while national choices (subsidies, export controls, investment screening) can trigger retaliation, fragmentation, or reconfiguration of global value chains — changing the supranational environment.</p>
+    <p>National industrial policies and security decisions contribute to "economic fracturing" that reshapes global investment patterns.</p>
+  </div>
+</details>
+
+<!-- NON-ADJACENT -->
+
+<h3 id="nonadj">Non-Adjacent Mechanisms (Direct "Skips")</h3>
+
+<details>
+  <summary><span class="badge badge-meta">Supra</span> → <span class="badge badge-firm">Firm</span> &nbsp;(Direct Channel)</summary>
+  <div class="detail-body">
+    <p><strong>Via GVC governance:</strong> Lead firms and cross-border standards can directly shape suppliers' processes, margins, and upgrading paths even without mediation through domestic industry structure. Governance forms (market, modular, relational, captive, hierarchy) depend on transaction complexity, codifiability, and supplier capabilities — often determining suppliers' upgrading opportunities and margin structure.</p>
+    <p><strong>Via geopolitical risk:</strong> Policy shocks can reduce investment and employment, creating firm-level effects that bypass slower-moving domestic institutions. News-based geopolitical risk indicators show that higher geopolitical risk foreshadows lower investment and that high firm-level geopolitical risk is associated with lower firm investment.</p>
+  </div>
+</details>
+<details>
+  <summary><span class="badge badge-macro">Macro</span> → <span class="badge badge-firm">Firm</span> &nbsp;(Direct Channel)</summary>
+  <div class="detail-body">
+    <p>Macro crises operate as a balance-sheet and demand shock; even well-positioned firms can see liquidity evaporate when credit tightens and confidence collapses. IMF analysis documents severe global output contraction emphasizing financial-sector stress creating corrosive feedback between weakening activity and financial strains.</p>
+    <p>Cross-country evidence on management practices shows that "firm-level" capabilities (management quality) covary with national institutional and competitive conditions, underscoring that firm drivers are <strong>partly endogenously shaped</strong> by macro context.</p>
+  </div>
+</details>
+<details>
+  <summary><span class="badge badge-meso">Cluster</span> → <span class="badge badge-firm">Firm</span> &nbsp;(Direct Channel)</summary>
+  <div class="detail-body">
+    <p>Cluster density often increases innovation and scaling speed, but can raise costs (labor and real estate) and intensify local rivalry, producing <strong>non-linear, sometimes threshold-type effects</strong>.</p>
+  </div>
+</details>
+
+<!-- SELECTION -->
+
+<h3 id="selection">Selection &amp; Reallocation as a Multi-Level Mechanism</h3>
+<div class="card">
+  <p>International trade exposure can raise aggregate industry productivity not only through within-firm improvement but through <strong>reallocation</strong>: only more productive firms export, and the least productive exit. Changes at the supranational level (trade integration, trade barriers) can materially alter industry composition and observed firm performance distributions.</p>
+</div>
+
+<!-- INSTITUTIONS -->
+
+<h3 id="institutions">Governance &amp; Institutions as Transmission Infrastructure</h3>
+<div class="card">
+  <p>Institutions are not background noise; they determine whether contracts are enforced and whether investment is protected. A prominent institutional-economics result is that measures of protection against expropriation have <strong>large estimated effects</strong> on income and investment incentives. However, institutional quality itself is an equilibrium outcome, requiring identification strategies to estimate causal effects.</p>
+</div>
+
+<!-- ═══════════════════════════ CASE STUDIES ═══════════════════════════ -->
+
+<h2 id="cases">Empirical Evidence &amp; Case Studies</h2>
+
+<p>The most rigorous evidence comes from (i) econometric multi-region/industry datasets, (ii) microdata on management, innovation, and exports, and (iii) quasi-experimental analyses around policy changes or technology diffusion.</p>
+
+<!-- CASE 1: TSMC -->
+
+<h3 id="case-tsmc">Case 1: Semiconductor Manufacturing — TSMC &amp; Taiwan</h3>
+<div class="case">
+<div class="card">
+  <p><span class="badge badge-firm">Firm</span> &nbsp;TSMC 2024: <strong>US$90.08B</strong> consolidated revenue, <strong>US$36.52B</strong> net income, <strong>45.7%</strong> operating margin (both gross and operating margins rising YoY). Signals strong execution and value capture in an exceptionally capital- and knowledge-intensive industry — consistent with positioning, activities, resources, knowledge, leadership.</p>
+
+  <p><span class="badge badge-meso">Meso</span> &nbsp;The semiconductor "ecosystem" is difficult to relocate because it depends on <strong>dense supplier networks, skills, and complementary capabilities</strong> — precisely the cluster-level "inputs and suppliers" and "shared resources/activities" channels. Hsinchu Science Park's growth was supported by incentives (skilled engineers, tax credits, infrastructure, administrative services) and reached large scale in firm count, employment, and sales in the 1990s — explicitly framed as a cluster-building vehicle. The interaction logic: cluster-level inputs increase productivity and shorten feedback cycles for firm "knowledge" and "activities," reinforcing industry leadership and attracting further specialized inputs (positive feedback loop).</p>
+
+  <p><span class="badge badge-macro">Macro</span> &nbsp;Long-run science-park and industrial capability-building, where public planning and research infrastructure stimulated agglomeration and continuous capacity expansion.</p>
+
+  <p><span class="badge badge-meta">Meta</span> &nbsp;Geopolitical tensions and reshoring policies create both demand/security pressures and investment incentives for building capacity abroad, while simultaneously reinforcing the option value of keeping core ecosystems intact. Senior officials argue transplanting large shares of capacity is "impossible" because the ecosystem is deeply rooted — reflecting practical constraints consistent with cluster and shared-resource mechanisms.</p>
+
+  <div class="insight">
+    <div class="insight-label">Interaction Insight</div>
+    The firm's advantage is not reducible to "good management" alone; it is a <strong>system property</strong> of firm-level capabilities <em>embedded within</em> a cluster that is <em>enabled by</em> national institutions and <em>constrained/redirected by</em> supranational fragmentation dynamics.
+  </div>
+</div>
+</div>
+
+<!-- CASE 2: VESTAS -->
+
+<h3 id="case-vestas">Case 2: Wind Energy — Vestas &amp; Denmark</h3>
+<div class="case">
+<div class="card">
+  <p><span class="badge badge-macro">Macro → Micro</span> &nbsp;National policy design (competitive tenders and feed-in-tariff mechanisms) illustrates macro government policy directly shaping industry demand and investment risk — influencing meso cluster investment and micro industry structure. A Danish Energy Agency review emphasizes Denmark's long-term political commitment, evolving regulatory framework, and planning/tendering experience as the backbone of offshore wind development — treating regulation as a <strong>central driver</strong> rather than a peripheral constraint.</p>
+
+  <p><span class="badge badge-firm">Firm</span> &nbsp;Vestas 2024: <strong>EUR 17,295m</strong> revenue, <strong>4.3%</strong> EBIT margin (before special items), <strong>EUR 68.4bn</strong> combined order backlog — reflecting execution under changing industry economics, tender dynamics, and cost conditions.</p>
+
+  <p><span class="badge badge-meta">Meta</span> &nbsp;Global cost-of-capital shocks and geopolitical/trade volatility (which the firm flags as affecting uncertainty), while policy announcements on subsidies/tender redesign respond to global conditions. Global patent and innovation indicators show sustained growth in renewable-energy-related inventive activity — consistent with policy-induced markets and cluster ecosystems sustaining long-run innovation trajectories.</p>
+
+  <div class="insight">
+    <div class="insight-label">Interaction Insight</div>
+    Macro policy instruments change micro/industry economics (bankability, rivalry, margins), which changes firm-level investment and capability accumulation; supranational capital-market and supply-chain conditions can <strong>flip the effectiveness</strong> of a given policy design, forcing redesign. "Micro policies" and "macro government policies" can be decisive determinants of industry profit logic and thus of firm performance.
+  </div>
+</div>
+</div>
+
+<!-- CASE 3: M-PESA -->
+
+<h3 id="case-mpesa">Case 3: Mobile Money — Safaricom / M-PESA &amp; Kenya</h3>
+<div class="case">
+<div class="card">
+  <p><strong>Welfare evidence:</strong> Peer-reviewed analysis finds increased access to mobile-money agents is associated with <strong>higher per-capita consumption</strong> and <strong>significant reductions in extreme poverty and poverty</strong>, with particularly strong gains for female-headed households; estimates diffusion helped raise <strong>at least 194,000 households</strong> out of extreme poverty — a concrete outcome channel from firm/industry innovation to macro welfare.</p>
+
+  <p><span class="badge badge-firm">Firm</span> &nbsp;M-PESA revenue grew <strong>19.4% YoY</strong> to <strong>KShs 139.91Bn</strong>, alongside large growth in chargeable transactions per active customer and very large transaction values — evidence of scale and monetization of a platform activity system, consistent with "positioning," "activities," and "knowledge."</p>
+
+  <p><span class="badge badge-meso">Meso</span> &nbsp;Mobile money depends on a physical-digital complement system: <strong>agent networks, distribution, handset penetration, and interoperability</strong> ("shared activities" and "complementarities") alongside traditional banking ("substitutes") and telecom competition ("micro").</p>
+
+  <p><span class="badge badge-macro">Macro</span> &nbsp;Effective regulation and institutional trust are preconditions for wide adoption and consumer willingness to store value digitally — linking macro institutions and civil society to meso demand formation.</p>
+
+  <div class="insight">
+    <div class="insight-label">Interaction Insight</div>
+    The "industry" boundary itself shifts (telecom + finance convergence), showing <strong>micro-level redefinition</strong> interacting with firm scope and national regulatory choices. A technological and organizational innovation at the firm level meaningfully influences macro outcomes (poverty and consumption) — illustrating <strong>two-way causality</strong> consistent with the pentagon's feedback logic.
+  </div>
+</div>
+</div>
+
+<!-- CASE 4: BOSTON -->
+
+<h3 id="case-boston">Case 4: Life Sciences — Cambridge / Boston, Massachusetts</h3>
+<div class="case">
+<div class="card">
+  <p><span class="badge badge-macro">Macro → Meso</span> &nbsp;Nearly <strong>$2.5B</strong> in NIH awards across thousands of grants in FY2024, supporting hospitals, educational institutions, research institutes, and private companies — directly strengthening "shared resources" (research infrastructure and talent demand).</p>
+
+  <p><span class="badge badge-meso">Meso Institutions</span> &nbsp;The <strong>Massachusetts Life Sciences Center</strong> (created 2006 to promote the life sciences sector; state commitment to investing <strong>$1B</strong> over a 10-year period to create jobs and drive innovation) acts as steward and administrator of the investment framework. This combines with major hospitals, universities, specialized labor markets (shared resources), and dense startup/VC infrastructure (meso institutions).</p>
+
+  <p><span class="badge badge-firm">Firm</span> &nbsp;Day-to-day implication: faster access to talent, partners, and clinical/testing infrastructure, but also higher factor costs. Market reports note cost pressure in premier submarkets — illustrating that cluster density can be <strong>an advantage and a tax</strong>.</p>
+
+  <p><strong>Cross-level mechanism:</strong> Macro funding and enabling policy → meso institutions (programs, intermediaries, infrastructure) → reduced cost and time for firm-level knowledge generation, clinical translation, and scaling — while also generating congestion effects that must be managed.</p>
+
+  <div class="insight">
+    <div class="insight-label">Interaction Insight</div>
+    Macro science funding does not automatically translate into firm performance; translation is <strong>mediated by meso institutions</strong> (tech transfer offices, incubators, venture finance) and by <strong>micro industry features</strong> (IP regimes, regulatory timelines, competitive dynamics).
+  </div>
+</div>
+</div>
+
+<!-- CASE 5: GFC -->
+
+<h3 id="case-gfc">Case 5: Global Financial Crisis — Macro–Meta Transmission</h3>
+<div class="case">
+<div class="card">
+  <p>The GFC illustrates how <strong>supranational financial contagion and confidence collapse</strong> transmit into national recessions and then into firm demand, financing conditions, and survival probabilities.</p>
+  <p>IMF analysis documents severe global output contraction and emphasizes the need to repair the financial sector for recovery — an explicit macro mechanism affecting firms across industries. Financial-sector stress can create <strong>corrosive feedback</strong> between weakening activity and financial strains.</p>
+</div>
+</div>
+
+<!-- ═══════════════════════════ IMPLICATIONS ═══════════════════════════ -->
+
+<h2 id="implications">Policy &amp; Managerial Implications by Level</h2>
+
+<details>
+  <summary><span class="badge badge-firm">Firm</span> &nbsp;Firm-Level Interventions</summary>
+  <div class="detail-body">
+    <h4>Positioning, Activities, Resources, Knowledge, Competitive Scope, Corporate Strategy, Organization, Leadership</h4>
+    <p>The most reliable levers are disciplined <strong>strategic positioning and activity fit</strong>, not just best-practice imitation. Sustained advantage lies in performing different activities or performing similar activities differently, creating trade-offs competitors cannot replicate.</p>
+    <p>Build <strong>dynamic capabilities</strong> — the capacity to integrate, build, and reconfigure competencies under rapid change — because payoffs to firm resources depend on how they are redeployed under shifting conditions.</p>
+    <p><strong>Practical priorities:</strong></p>
+    <ul>
+      <li>Run strategy as a <strong>living system</strong> (capability reviews, not just annual planning).</li>
+      <li>Treat <strong>risk management as strategic</strong> (liquidity, supplier redundancy, compliance capacity).</li>
+      <li>Institutionalize <strong>execution discipline</strong> (decision rights, incentives, governance).</li>
+      <li>Focus governance on <strong>accountability, transparency, and board oversight quality</strong> (international principles emphasize governance as central to market confidence, integrity, and financial stability).</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary><span class="badge badge-micro">Micro</span> &nbsp;Micro / Industry-Level Interventions</summary>
+  <div class="detail-body">
+    <h4>Industry Characteristics, Competition, Cooperation, Strategic Groupings, Role of Lead Firms, Micro Policies, Micro Institutions</h4>
+    <p><strong>Managers:</strong> Treat "industry economics" as a constraint set and an opportunity set. Pick battles where positioning can be defended and rivalry does not structurally erase returns. Industry analysis must drive concrete decisions — not be performative. In lead-firm / platform-dominated industries, invest in bargaining power, differentiation, and multi-homing strategies (consistent with GVC governance theories).</p>
+    <p><strong>Policymakers:</strong> Focus on predictable regulation, competition policy, and standards infrastructure that foster innovation without entrenching incumbents. Sector regulation should preserve long-run investment incentives while protecting safety and fairness — particularly where bargaining power can become excessive.</p>
+  </div>
+</details>
+
+<details>
+  <summary><span class="badge badge-meso">Meso</span> &nbsp;Meso / Cluster-Level Interventions</summary>
+  <div class="detail-body">
+    <h4>Inputs &amp; Suppliers, Demand &amp; Customers, Shared Resources, Shared Activities, Complementarities, Substitutes, Meso Policies, Meso Institutions</h4>
+    <p><strong>Managers:</strong> Treat clusters as <strong>strategic assets and liabilities</strong>. Systematically map which institutions matter, where spillovers come from, where substitutes can break margins; decide whether to deepen vs. de-risk local embeddedness. Selectively embed where returns are highest.</p>
+    <p><strong>Policymakers:</strong> Prefer cluster-based interventions that address <strong>coordination failures</strong> (skills, infrastructure, technology transfer, neutral intermediaries) rather than picking firm winners. Evidence-based targeting using observable co-location, I-O linkages, and skill-use similarity is preferable to prestige-based targeting.</p>
+  </div>
+</details>
+
+<details>
+  <summary><span class="badge badge-macro">Macro</span> &nbsp;Macro / National-Level Interventions</summary>
+  <div class="detail-body">
+    <h4>Macroeconomics, Macro Government Policies, Macro Institutions, Civil Society</h4>
+    <p><strong>Managers:</strong> Incorporate macro scenario planning and country-risk governance into core strategy. Hardwire macro risk: liquidity buffers, FX/rate hedging, scenario planning for recessions and credit tightening. Crises and institutional shifts can dominate firm-level excellence.</p>
+    <p><strong>Governments:</strong> Prioritize macro stability, credible institutions, and productivity-enhancing reforms — these expand the feasible set for clusters and industries. Institutional quality shapes investment incentives and long-run income.</p>
+  </div>
+</details>
+
+<details>
+  <summary><span class="badge badge-meta">Meta</span> &nbsp;Meta / Supranational-Level Interventions</summary>
+  <div class="detail-body">
+    <h4>Multilateral Orgs, Supranational Policies/Institutions, Trade Blocs, Foreign Governments, Int'l Financial Flows, Foreign Multinationals, Regional Groupings</h4>
+    <p><strong>Managers:</strong> Treat geopolitics and GVC governance as <strong>first-order strategic variables</strong>, not "externalities." Build explicit capabilities (export-control compliance, sanctions screening, dual-use assessments). Diversify value chains where concentration risk is existential. GVC governance structures determine power asymmetries and compliance burdens; geopolitical risk is empirically associated with lower investment and higher downside risks.</p>
+    <p><strong>Governments:</strong> Treat trade diplomacy, standards participation, and investment facilitation as competitiveness policy. Combine international engagement (rules and cooperation) with resilience-building (infrastructure, skills, secure supply chains). Avoid improvisation that deters long-horizon investment.</p>
+  </div>
+</details>
+
+<!-- ═══════════════════════════ METHODOLOGY ═══════════════════════════ -->
+
+<h2 id="methodology">Methodological Notes &amp; Research Gaps</h2>
+<p>Multi-level analysis fails most often for three methodological reasons: <strong>endogeneity</strong>, <strong>measurement error</strong>, and <strong>mis-specified boundaries</strong>.</p>
+
+<details>
+  <summary>Endogeneity &amp; Reverse Causality</summary>
+  <div class="detail-body">
+    <p>Many drivers are jointly determined: strong firms attract suppliers/talent → strengthens cluster → raises firm productivity (positive feedback). The cluster-composition study frames the need to separate convergence effects from agglomeration spillovers. Similarly, institutions influence investment and income, but institutional quality itself is an equilibrium outcome — requiring identification strategies.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Selection Effects Under Openness</summary>
+  <div class="detail-body">
+    <p>Trade openness can raise aggregate productivity partly through selection and reallocation toward more productive firms and exit of the least productive, meaning "performance improvements" may reflect <strong>compositional change</strong> rather than within-firm improvement. Policy implication: interventions increasing openness may improve averages while harming specific firms or places.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Measurement Quality &amp; Comparability</summary>
+  <div class="detail-body">
+    <p><strong>Firm level:</strong> Management quality is measurable and strongly associated with productivity/profitability, but standardized survey instruments face response bias and context dependence.</p>
+    <p><strong>National level:</strong> WDI documentation highlights cross-country and intertemporal comparability challenges. WGI governance measures are often perception-based composites; methodology documents aggregation changes, with caution that specific reform assessment is better served by purpose-built diagnostics.</p>
+    <p><strong>Geopolitical risk:</strong> News-based indices enable quantification for strategy dashboards, but more work is needed to link firm exposure pathways (suppliers, customers, compliance regimes) to capital allocation outcomes.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Boundary Instability</summary>
+  <div class="detail-body">
+    <p>Industry boundaries shift under technological convergence (e.g., telecom–finance), invalidating static definitions and distorting concentration metrics. Cluster mapping faces fundamental tradeoffs between conceptual fidelity and data availability; authoritative guidance notes reliance on co-location evidence and balancing data constraints with conceptual alignment.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Research Gaps with High Managerial Relevance</summary>
+  <div class="detail-body">
+    <ol>
+      <li><strong>Cross-level complementarities &amp; thresholds.</strong> Evidence that clusters/institutions matter is strong, but less settled on <em>when</em> they matter most (threshold effects), how complementarities amplify/dampen returns to firm capabilities, and when cluster policy amplifies firm capabilities vs. merely subsidizes incumbents. Data scarcity at the right granularity is a core constraint.</li>
+      <li><strong>Rapid technological regime change.</strong> The framework suits discontinuities, but empirical work often lags because data are backward-looking; linking real-time technology diffusion to firm performance remains an open measurement frontier.</li>
+      <li><strong>Policy evaluation under fragmented globalization.</strong> Identifying which policy mixes improve resilience without permanently reducing productivity gains from openness is increasingly important and under-identified. UNCTAD's evidence suggests models must explicitly incorporate policy competition, supply chain diversification, and regulatory friction as state variables.</li>
+      <li><strong>Institutions → micro mechanisms.</strong> The institutions–growth link is well documented, but more work is needed to trace concrete industry/firm channels (e.g., how contract enforcement changes supplier network structure and innovation speed).</li>
+    </ol>
+  </div>
+</details>
+
+<div style="margin-top:48px; padding-top:20px; border-top:1px solid var(--border); color:var(--text-dim); font-size:12px;">
+  <p><em>This integrated study reference consolidates all substantive content from both source documents. Every driver label, mechanism, case detail, empirical metric, policy lever, and methodological caveat has been preserved without omission.</em></p>
+</div>
+
+</main>
+
+<script>
+// Highlight active nav link on scroll
+const sections = document.querySelectorAll('h2[id], h3[id], details[id], div[id]');
+const navLinks = document.querySelectorAll('nav a');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`nav a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
