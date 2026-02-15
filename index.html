@@ -30,20 +30,20 @@
   body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.7; font-size:15px; }
 
 /* NAV */
-nav { position:fixed; top:0; left:0; width:260px; height:100vh; background:var(--surface); border-right:1px solid var(--border); padding:20px 16px; overflow-y:auto; z-index:100; }
-nav h2 { font-size:14px; color:var(--accent); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:16px; }
-nav a { display:block; color:var(--text-dim); text-decoration:none; font-size:13px; padding:5px 8px; border-radius:6px; margin-bottom:2px; transition:.2s; }
-nav a:hover, nav a.active { background:var(--surface2); color:var(--text); }
+nav { position:fixed; top:0; left:0; width:260px; height:100vh; background:var(–surface); border-right:1px solid var(–border); padding:20px 16px; overflow-y:auto; z-index:100; }
+nav h2 { font-size:14px; color:var(–accent); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:16px; }
+nav a { display:block; color:var(–text-dim); text-decoration:none; font-size:13px; padding:5px 8px; border-radius:6px; margin-bottom:2px; transition:.2s; }
+nav a:hover, nav a.active { background:var(–surface2); color:var(–text); }
 nav .sub { padding-left:16px; font-size:12px; }
 
 /* MAIN */
 main { margin-left:260px; max-width:960px; padding:40px 48px 80px; }
 
-h1 { font-size:28px; font-weight:700; margin-bottom:8px; background:linear-gradient(135deg,var(--accent),var(--meta)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.subtitle { color:var(--text-dim); font-size:14px; margin-bottom:36px; }
+h1 { font-size:28px; font-weight:700; margin-bottom:8px; background:linear-gradient(135deg,var(–accent),var(–meta)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.subtitle { color:var(–text-dim); font-size:14px; margin-bottom:36px; }
 
-h2 { font-size:21px; font-weight:700; margin:48px 0 16px; padding-top:16px; border-top:1px solid var(--border); color:var(--text); }
-h3 { font-size:17px; font-weight:600; margin:28px 0 10px; color:var(--text); }
+h2 { font-size:21px; font-weight:700; margin:48px 0 16px; padding-top:16px; border-top:1px solid var(–border); color:var(–text); }
+h3 { font-size:17px; font-weight:600; margin:28px 0 10px; color:var(–text); }
 h4 { font-size:15px; font-weight:600; margin:20px 0 8px; }
 
 p, li { margin-bottom:10px; }
@@ -54,46 +54,46 @@ strong { color:#fff; }
 .section { margin-bottom:32px; }
 
 /* COLLAPSIBLE */
-details { background:var(--surface); border:1px solid var(--border); border-radius:10px; margin-bottom:12px; }
-details[open] { border-color:var(--accent); }
+details { background:var(–surface); border:1px solid var(–border); border-radius:10px; margin-bottom:12px; }
+details[open] { border-color:var(–accent); }
 summary { cursor:pointer; padding:14px 18px; font-weight:600; font-size:15px; list-style:none; display:flex; align-items:center; gap:10px; user-select:none; }
-summary::before { content:'▸'; font-size:13px; transition:transform .2s; color:var(--accent); }
+summary::before { content:‘▸’; font-size:13px; transition:transform .2s; color:var(–accent); }
 details[open] summary::before { transform:rotate(90deg); }
 summary::-webkit-details-marker { display:none; }
 .detail-body { padding:4px 18px 18px; }
 
 /* LEVEL BADGES */
 .badge { display:inline-block; font-size:11px; font-weight:700; padding:2px 10px; border-radius:20px; letter-spacing:.5px; text-transform:uppercase; }
-.badge-firm { background:var(--firm-bg); color:var(--firm); border:1px solid rgba(245,158,66,.25); }
-.badge-micro { background:var(--micro-bg); color:var(--micro); border:1px solid rgba(56,189,248,.25); }
-.badge-meso { background:var(--meso-bg); color:var(--meso); border:1px solid rgba(74,222,128,.25); }
-.badge-macro { background:var(--macro-bg); color:var(--macro); border:1px solid rgba(244,114,182,.25); }
-.badge-meta { background:var(--meta-bg); color:var(--meta); border:1px solid rgba(192,132,252,.25); }
+.badge-firm { background:var(–firm-bg); color:var(–firm); border:1px solid rgba(245,158,66,.25); }
+.badge-micro { background:var(–micro-bg); color:var(–micro); border:1px solid rgba(56,189,248,.25); }
+.badge-meso { background:var(–meso-bg); color:var(–meso); border:1px solid rgba(74,222,128,.25); }
+.badge-macro { background:var(–macro-bg); color:var(–macro); border:1px solid rgba(244,114,182,.25); }
+.badge-meta { background:var(–meta-bg); color:var(–meta); border:1px solid rgba(192,132,252,.25); }
 
 /* CARDS */
-.card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:18px 20px; margin-bottom:14px; }
+.card { background:var(–surface); border:1px solid var(–border); border-radius:10px; padding:18px 20px; margin-bottom:14px; }
 .card-title { font-weight:700; font-size:15px; margin-bottom:6px; }
 
 /* KEY INSIGHT BOX */
-.insight { background:rgba(124,140,248,.07); border-left:3px solid var(--accent); padding:14px 18px; border-radius:0 8px 8px 0; margin:16px 0; }
-.insight-label { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--accent); font-weight:700; margin-bottom:4px; }
+.insight { background:rgba(124,140,248,.07); border-left:3px solid var(–accent); padding:14px 18px; border-radius:0 8px 8px 0; margin:16px 0; }
+.insight-label { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(–accent); font-weight:700; margin-bottom:4px; }
 
 /* TABLES */
-.table-wrap { overflow-x:auto; margin:16px 0; border-radius:10px; border:1px solid var(--border); }
+.table-wrap { overflow-x:auto; margin:16px 0; border-radius:10px; border:1px solid var(–border); }
 table { width:100%; border-collapse:collapse; font-size:13px; }
-thead { background:var(--surface2); }
-th { padding:10px 12px; text-align:left; font-weight:700; color:var(--text); border-bottom:1px solid var(--border); white-space:nowrap; }
-td { padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; }
+thead { background:var(–surface2); }
+th { padding:10px 12px; text-align:left; font-weight:700; color:var(–text); border-bottom:1px solid var(–border); white-space:nowrap; }
+td { padding:10px 12px; border-bottom:1px solid var(–border); vertical-align:top; }
 tr:last-child td { border-bottom:none; }
 tr:hover td { background:rgba(124,140,248,.04); }
 td:first-child { font-weight:600; white-space:nowrap; }
 
 /* CASE STUDY */
-.case { border-left:3px solid var(--accent); margin:16px 0; }
+.case { border-left:3px solid var(–accent); margin:16px 0; }
 .case .card { border-left:none; border-radius:0 10px 10px 0; }
 
 /* DIAGRAM */
-.diagram-box { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px; margin:20px 0; text-align:center; }
+.diagram-box { background:var(–surface); border:1px solid var(–border); border-radius:12px; padding:24px; margin:20px 0; text-align:center; }
 .diagram-box svg { max-width:100%; }
 
 /* PENTAGON DIAGRAM */
@@ -103,12 +103,12 @@ td:first-child { font-weight:600; white-space:nowrap; }
 /* FLOW ARROWS */
 .flow { display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin:16px 0; }
 .flow-item { padding:8px 14px; border-radius:8px; font-size:13px; font-weight:600; }
-.flow-arrow { color:var(--text-dim); font-size:18px; }
+.flow-arrow { color:var(–text-dim); font-size:18px; }
 
 /* MECHANISM LIST */
 .mech-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0; }
-.mech-item { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:12px 14px; }
-.mech-num { display:inline-block; width:22px; height:22px; line-height:22px; text-align:center; background:var(--accent); color:#fff; border-radius:50%; font-size:11px; font-weight:700; margin-right:6px; }
+.mech-item { background:var(–surface); border:1px solid var(–border); border-radius:8px; padding:12px 14px; }
+.mech-num { display:inline-block; width:22px; height:22px; line-height:22px; text-align:center; background:var(–accent); color:#fff; border-radius:50%; font-size:11px; font-weight:700; margin-right:6px; }
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -215,22 +215,24 @@ main { margin-left:0; padding:24px 18px 60px; }
       <text x="220" y="41" text-anchor="middle" fill="var(--firm)" font-size="10" font-weight="700">FIRM</text>
       <text x="220" y="53" text-anchor="middle" fill="var(--firm)" font-size="8">Level</text>
 
-      <circle cx="393" cy="172" r="28" fill="rgba(56,189,248,.15)" stroke="var(--micro)" stroke-width="2"/>
-      <text x="393" y="169" text-anchor="middle" fill="var(--micro)" font-size="10" font-weight="700">MICRO</text>
-      <text x="393" y="181" text-anchor="middle" fill="var(--micro)" font-size="8">Industry</text>
+```
+  <circle cx="393" cy="172" r="28" fill="rgba(56,189,248,.15)" stroke="var(--micro)" stroke-width="2"/>
+  <text x="393" y="169" text-anchor="middle" fill="var(--micro)" font-size="10" font-weight="700">MICRO</text>
+  <text x="393" y="181" text-anchor="middle" fill="var(--micro)" font-size="8">Industry</text>
 
-      <circle cx="333" cy="370" r="28" fill="rgba(74,222,128,.15)" stroke="var(--meso)" stroke-width="2"/>
-      <text x="333" y="367" text-anchor="middle" fill="var(--meso)" font-size="10" font-weight="700">MESO</text>
-      <text x="333" y="379" text-anchor="middle" fill="var(--meso)" font-size="8">Cluster</text>
+  <circle cx="333" cy="370" r="28" fill="rgba(74,222,128,.15)" stroke="var(--meso)" stroke-width="2"/>
+  <text x="333" y="367" text-anchor="middle" fill="var(--meso)" font-size="10" font-weight="700">MESO</text>
+  <text x="333" y="379" text-anchor="middle" fill="var(--meso)" font-size="8">Cluster</text>
 
-      <circle cx="107" cy="370" r="28" fill="rgba(244,114,182,.15)" stroke="var(--macro)" stroke-width="2"/>
-      <text x="107" y="367" text-anchor="middle" fill="var(--macro)" font-size="10" font-weight="700">MACRO</text>
-      <text x="107" y="379" text-anchor="middle" fill="var(--macro)" font-size="8">National</text>
+  <circle cx="107" cy="370" r="28" fill="rgba(244,114,182,.15)" stroke="var(--macro)" stroke-width="2"/>
+  <text x="107" y="367" text-anchor="middle" fill="var(--macro)" font-size="10" font-weight="700">MACRO</text>
+  <text x="107" y="379" text-anchor="middle" fill="var(--macro)" font-size="8">National</text>
 
-      <circle cx="47" cy="172" r="28" fill="rgba(192,132,252,.15)" stroke="var(--meta)" stroke-width="2"/>
-      <text x="47" y="169" text-anchor="middle" fill="var(--meta)" font-size="10" font-weight="700">META</text>
-      <text x="47" y="181" text-anchor="middle" fill="var(--meta)" font-size="8">Supra</text>
-    </svg>
+  <circle cx="47" cy="172" r="28" fill="rgba(192,132,252,.15)" stroke="var(--meta)" stroke-width="2"/>
+  <text x="47" y="169" text-anchor="middle" fill="var(--meta)" font-size="10" font-weight="700">META</text>
+  <text x="47" y="181" text-anchor="middle" fill="var(--meta)" font-size="8">Supra</text>
+</svg>
+```
 
   </div>
 </div>
